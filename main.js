@@ -87,7 +87,7 @@ function timeSlider(value) {
     const hour = +value;
     const filteredByTime = fireData.filter(d => {
         const acqTime = +d.acq_time;
-        return Math.floor(acqTime / 100) === hour;
+        return Math.floor(acqTime / 100) <= hour;
     });
 
     const visibleData = filteredByTime.filter(d => {
@@ -117,16 +117,6 @@ function timeSlider(value) {
 d3.select('#time-slider').on('input', function() {
     timeSlider(this.value);
 });
-
-//loading tooltip function
-function tooltipLoad(event){
-    const tooltip = d3.select('#tooltip');
-    tooltip.style('left', (event.pageX + 10) + 'px')
-              .style('top', (event.pageY + 10) + 'px')
-              .style('opacity', 1)
-              .html(`Latitude: ${event.latitude}<br>Longitude: ${event.longitude}<br>FRP: ${event.frp}`);
-    
-}
 
 //zoom functionality function
 const zoom = d3.zoom()
